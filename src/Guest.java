@@ -34,7 +34,7 @@ public class Guest {
         this.phone = phone;
     }
 
-    @Override
+
     public String toString() {
         return "Guest{" +
                 "name='" + name + '\'' +

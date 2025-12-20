@@ -48,7 +48,7 @@ public class Room {
         this.available = false;
     }
 
-    @Override
+
     public String toString() {
         return "Room{" +
                 "roomNumber=" + roomNumber +

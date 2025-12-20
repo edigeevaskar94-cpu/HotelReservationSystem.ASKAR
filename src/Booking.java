@@ -29,7 +29,7 @@ public class Booking {
         return totalPrice;
     }
 
-    @Override
+
     public String toString() {
         return "Booking{" +
                 "room=" + room +
