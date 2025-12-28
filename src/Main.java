@@ -1,22 +1,37 @@
+package com.hotel;
+
+import com.hotel.model.enums.RoomType;
+import com.hotel.payment.CardPayment;
+import com.hotel.service.ReservationManager;
+import com.hotel.util.SearchCriteria;
+
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args) {
 
-        Room room1 = new Room(101, "Single", 50.0, true);
-        Room room2 = new Room(102, "Double", 80.0, true);
+        ReservationManager manager = new ReservationManager();
+        manager.seedData();
 
-        Guest guest1 = new Guest("Askar", "KZ2008", "87471571182");
+        SearchCriteria criteria = new SearchCriteria(
+                RoomType.DELUXE,
+                LocalDate.of(2025, 1, 10),
+                LocalDate.of(2025, 1, 15)
+        );
 
-        Booking booking1 = new Booking(room1, guest1, 3);
+        System.out.println("Available rooms:");
+        manager.searchRooms(criteria).forEach(System.out::println);
 
-        System.out.println(room1);
-        System.out.println(room2);
-        System.out.println(guest1);
-        System.out.println(booking1);
+        System.out.println("\nBooking...");
+        manager.createBooking(
+                1,
+                2,
+                LocalDate.of(2025, 1, 10),
+                LocalDate.of(2025, 1, 15),
+                new CardPayment()
+        );
 
-        if (room1.getPrice() > room2.getPrice()) {
-            System.out.println("Room 101 is more expensive than Room 102");
-        } else {
-            System.out.println("Room 102 is more expensive than Room 101");
-        }
+        System.out.println("\nAll bookings:");
+        manager.getAllBookings().forEach(System.out::println);
     }
 }
